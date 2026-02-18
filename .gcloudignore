@@ -1,0 +1,61 @@
+# This file specifies files that are *not* uploaded to Google Cloud
+# using gcloud. It follows the same syntax as .gitignore, with the addition of
+# "#!include" directives (which insert the entries of the given .gitignore-style
+# file at that point).
+#
+# For more information, run:
+#   $ gcloud topic gcloudignore
+#
+.gcloudignore
+# If you would like to upload your .git directory, .gitignore file or files
+# from your .gitignore file, remove the corresponding line
+# below:
+.git
+.gitignore
+
+# Node.js dependencies:
+node_modules/
+
+# Build output (will be rebuilt in Cloud Build):
+dist/
+
+# Development files:
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Test files:
+*.test.ts
+*.spec.ts
+__tests__/
+coverage/
+
+# Documentation (not needed for deployment):
+*.md
+!README.md
+docs/
+
+# Agent directory (not needed for deployment):
+agent/
+AGENT.md
+
+# Environment files (secrets managed by Secret Manager):
+.env
+.env.*
+!.env.example
+
+# Git files:
+.gitattributes
+
+# CI/CD files (not needed in Cloud Build):
+.github/
+
+# Editor configs:
+.editorconfig
+.prettierrc
+.prettierignore
+
+# Other configs not needed for build:
+.qodo/
