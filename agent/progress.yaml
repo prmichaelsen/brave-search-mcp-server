@@ -160,19 +160,21 @@ progress:
 recent_work:
   - date: 2026-02-18
     description: |
-      Removed Zod completely from the project - MCP SDK now handles all validation.
+      Deployed brave-search-mcp-server v3.0.0 to Google Cloud Run after removing Zod validation.
     items:
       - ✅ Checked for ACP updates (version 1.4.3 - up to date)
       - ✅ Analyzed project structure and source code
-      - ✅ Reviewed all 6 search tool implementations
       - ✅ Created initial progress.yaml and ACP documentation
-      - ✅ Removed Zod from all 6 tools (images, web, news, videos, local, summarizer)
-      - ✅ Removed inputSchema from all tool registrations
-      - ✅ Changed all params types to any (MCP SDK validates)
-      - ✅ Removed Zod from config.ts (replaced with TypeScript types)
-      - ✅ Removed configSchema export from server.ts
-      - ✅ Removed Zod from package.json dependencies
-      - 📋 Next: Test the refactored server and verify MCP SDK validation works
+      - ✅ Removed Zod from all 6 tools and config (v3.0.0 breaking change)
+      - ✅ Created Cloud Run deployment setup (cloudbuild.yaml, .gcloudignore)
+      - ✅ Created @local.deploy command documentation
+      - ✅ Made Brave API key optional at startup (fetched from credentials endpoint)
+      - ✅ Deployed to Cloud Run successfully
+      - ✅ Service URL: https://brave-search-mcp-server-dit6gawkbq-uc.a.run.app
+      - ✅ Revision: brave-search-mcp-server-00002-wjb
+      - ✅ Commit SHA: 80eb9cc
+      - ✅ Build time: 3m59s
+      - ✅ Status: READY
 
 # Next steps (prioritized list)
 next_steps:
