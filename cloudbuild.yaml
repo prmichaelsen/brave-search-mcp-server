@@ -63,8 +63,3 @@ options:
   
 # Timeout for the entire build
 timeout: '1200s'
-
-# Substitutions (can be overridden at build time)
-substitutions:
-  _SERVICE_NAME: 'brave-search-mcp-server'
-  _REGION: 'us-central1'
