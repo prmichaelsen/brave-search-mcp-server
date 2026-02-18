@@ -46,7 +46,7 @@ steps:
       - '--memory=512Mi'
       - '--cpu=1'
       - '--timeout=300s'
-      - '--set-env-vars=NODE_ENV=production,BRAVE_MCP_TRANSPORT=http,BRAVE_MCP_PORT=8080,PLATFORM_URL=https://agentbase.me'
+      - '--set-env-vars=NODE_ENV=production,BRAVE_MCP_TRANSPORT=http,BRAVE_MCP_PORT=8080,BRAVE_MCP_STATELESS=true,PLATFORM_URL=https://agentbase.me'
       - '--update-secrets=PLATFORM_SERVICE_TOKEN=brave-search-platform-service-token:latest'
     id: 'deploy-cloud-run'
     waitFor: ['push-image']

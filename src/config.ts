@@ -116,12 +116,9 @@ export function getOptions(): Configuration | false {
     return false;
   }
 
-  if (!options.braveApiKey) {
-    console.error(
-      'Error: --brave-api-key is required. You can get one at https://brave.com/search/api/.'
-    );
-    return false;
-  }
+  // Note: braveApiKey is optional at startup when deployed to Cloud Run
+  // The API key is fetched from the credentials endpoint or passed via JWT by the tenant platform
+  // For local development, the API key can be provided via --brave-api-key or BRAVE_API_KEY env var
 
   if (options.transport === 'http') {
     if (options.port < 1 || options.port > 65535) {
