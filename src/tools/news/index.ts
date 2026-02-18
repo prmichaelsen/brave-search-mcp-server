@@ -1,5 +1,4 @@
 import type { ToolAnnotations } from '@modelcontextprotocol/sdk/types.js';
-import params, { type QueryParams } from './params.js';
 import API from '../../BraveAPI/index.js';
 import { stringify } from '../../utils.js';
 import { type McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
@@ -30,7 +29,7 @@ export const description = `
         - "According to [BBC News](https://www.bbc.com/news/world-europe-65910000), the UK government has announced a new policy to support renewable energy".
 `;
 
-export const execute = async (params: QueryParams) => {
+export const execute = async (params: any) => {
   const response = await API.issueRequest<'news'>('news', params);
 
   return {
@@ -58,7 +57,6 @@ export const register = (mcpServer: McpServer) => {
     {
       title: name,
       description: description,
-      inputSchema: params.shape,
       annotations: annotations,
     },
     execute
@@ -69,7 +67,6 @@ export default {
   name,
   description,
   annotations,
-  inputSchema: params.shape,
   execute,
   register,
 };

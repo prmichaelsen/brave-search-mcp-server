@@ -1,47 +1,18 @@
 import { LoggingLevel, LoggingLevelSchema } from '@modelcontextprotocol/sdk/types.js';
 import { Command } from 'commander';
 import dotenv from 'dotenv';
-import { z } from 'zod';
 import tools from './tools/index.js';
 
 dotenv.config({ debug: false, quiet: true });
 
-// Config schema for Smithery.ai
-export const configSchema = z.object({
-  braveApiKey: z
-    .string()
-    .describe('Your API key')
-    .default(process.env.BRAVE_API_KEY ?? ''),
-  enabledTools: z
-    .array(z.string())
-    .describe('Enforces a tool whitelist (cannot be used with disabledTools)')
-    .optional(),
-  disabledTools: z
-    .array(z.string())
-    .describe('Enforces a tool blacklist (cannot be used with enabledTools)')
-    .optional(),
-  loggingLevel: z
-    .enum([
-      'debug',
-      'error',
-      'info',
-      'notice',
-      'warning',
-      'critical',
-      'alert',
-      'emergency',
-    ] as const)
-    .default('info')
-    .describe('Desired logging level')
-    .optional(),
-  stateless: z
-    .boolean()
-    .default(false)
-    .describe('Whether the server should be stateless')
-    .optional(),
-});
-
-export type SmitheryConfig = z.infer<typeof configSchema>;
+// Config type for Smithery.ai
+export type SmitheryConfig = {
+  braveApiKey?: string;
+  enabledTools?: string[];
+  disabledTools?: string[];
+  loggingLevel?: LoggingLevel;
+  stateless?: boolean;
+};
 
 type Configuration = {
   transport: 'stdio' | 'http';
@@ -184,7 +155,13 @@ export function getOptions(): Configuration | false {
 }
 
 export function setOptions(options: SmitheryConfig) {
-  return Object.assign(state, options);
+  return Object.assign(state, {
+    braveApiKey: options.braveApiKey ?? state.braveApiKey,
+    enabledTools: options.enabledTools ?? state.enabledTools,
+    disabledTools: options.disabledTools ?? state.disabledTools,
+    loggingLevel: options.loggingLevel ?? state.loggingLevel,
+    stateless: options.stateless ?? state.stateless,
+  });
 }
 
 export default state;

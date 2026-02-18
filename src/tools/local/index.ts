@@ -4,7 +4,6 @@ import type {
   OpeningHours,
   DayOpeningHours,
 } from './types.js';
-import webParams, { type QueryParams as WebQueryParams } from '../web/params.js';
 import type { CallToolResult, ToolAnnotations } from '@modelcontextprotocol/sdk/types.js';
 import API from '../../BraveAPI/index.js';
 import { formatWebResults } from '../web/index.js';
@@ -31,7 +30,7 @@ export const description = `
 `;
 
 // Access to Local API is available through the Pro plans.
-export const execute = async (params: WebQueryParams) => {
+export const execute = async (params: any) => {
   // Make sure both 'web' and 'locations' are in the result_filter
   params = { ...params, result_filter: [...(params.result_filter || []), 'web', 'locations'] };
 
@@ -79,7 +78,6 @@ export const register = (mcpServer: McpServer) => {
     {
       title: name,
       description: description,
-      inputSchema: webParams.shape,
       annotations: annotations,
     },
     execute
@@ -176,7 +174,6 @@ export default {
   name,
   description,
   annotations,
-  inputSchema: webParams.shape,
   execute,
   register,
 };

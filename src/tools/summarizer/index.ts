@@ -1,5 +1,4 @@
 import type { CallToolResult, ToolAnnotations } from '@modelcontextprotocol/sdk/types.js';
-import { summarizerQueryParams, type SummarizerQueryParams } from './params.js';
 import API from '../../BraveAPI/index.js';
 import { type SummarizerSearchApiResponse } from './types.js';
 import { type McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
@@ -26,7 +25,7 @@ export const description = `
     Requirements: Must first perform a web search using brave_web_search with summary=true parameter. Requires a Pro AI subscription to access the summarizer functionality.
 `;
 
-export const execute = async (params: SummarizerQueryParams) => {
+export const execute = async (params: any) => {
   const response: CallToolResult = { content: [], isError: false };
 
   try {
@@ -73,7 +72,6 @@ export const register = (mcpServer: McpServer) => {
     {
       title: name,
       description: description,
-      inputSchema: summarizerQueryParams.shape,
       annotations: annotations,
     },
     execute
@@ -81,7 +79,7 @@ export const register = (mcpServer: McpServer) => {
 };
 
 const pollForSummary = async (
-  params: SummarizerQueryParams,
+  params: any,
   pollInterval: number = 50,
   attempts: number = 20
 ): Promise<SummarizerSearchApiResponse> => {
@@ -111,7 +109,6 @@ export default {
   name,
   description,
   annotations,
-  inputSchema: summarizerQueryParams.shape,
   execute,
   register,
 };

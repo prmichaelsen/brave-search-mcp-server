@@ -1,5 +1,4 @@
 import type { TextContent, ToolAnnotations } from '@modelcontextprotocol/sdk/types.js';
-import params, { type QueryParams } from './params.js';
 import API from '../../BraveAPI/index.js';
 import type {
   Discussions,
@@ -38,7 +37,7 @@ export const description = `
     When the "results_filter" parameter is empty, JSON results may also contain FAQ, Discussions, News, and Video results.
 `;
 
-export const execute = async (params: QueryParams) => {
+export const execute = async (params: any) => {
   const response = { content: [] as TextContent[], isError: false };
   const { web, faq, discussions, news, videos, summarizer } = await API.issueRequest<'web'>(
     'web',
@@ -126,7 +125,6 @@ export const register = (mcpServer: McpServer) => {
     {
       title: name,
       description: description,
-      inputSchema: params.shape,
       annotations: annotations,
     },
     execute
@@ -186,7 +184,6 @@ export default {
   name,
   description,
   annotations,
-  inputSchema: params.shape,
   execute,
   register,
 };

@@ -1,5 +1,4 @@
 import type { ToolAnnotations } from '@modelcontextprotocol/sdk/types.js';
-import params, { type QueryParams } from './params.js';
 import API from '../../BraveAPI/index.js';
 import { stringify } from '../../utils.js';
 import { type McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
@@ -21,7 +20,7 @@ export const description = `
     Returns a JSON list of video-related results with title, url, description, duration, and thumbnail_url.
 `;
 
-export const execute = async (params: QueryParams) => {
+export const execute = async (params: any) => {
   const response = await API.issueRequest<'videos'>('videos', params);
 
   return {
@@ -43,7 +42,6 @@ export const register = (mcpServer: McpServer) => {
     {
       title: name,
       description: description,
-      inputSchema: params.shape,
       annotations: annotations,
     },
     execute
@@ -54,7 +52,6 @@ export default {
   name,
   description,
   annotations,
-  inputSchema: params.shape,
   execute,
   register,
 };
